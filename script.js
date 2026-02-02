@@ -24,7 +24,7 @@ if (savedTheme === 'light') {
     if (mobileThemeToggle) mobileThemeToggle.innerHTML = '<i class="fas fa-sun"></i>';
 }
 
-// ==== MOBILE MENU - NO SCROLL EFFECT ====
+// ==== MOBILE MENU - COMPACT & FUNCTIONAL ====
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileCloseBtn = document.getElementById('mobileCloseBtn');
 const mobileMenu = document.getElementById('mobileMenu');
@@ -32,26 +32,26 @@ const body = document.body;
 
 function openMobileMenu() {
     mobileMenu.classList.add('active');
-    body.classList.add('no-scroll'); // Prevent body scroll
+    body.classList.add('no-scroll');
 }
 
 function closeMobileMenu() {
     mobileMenu.classList.remove('active');
-    body.classList.remove('no-scroll'); // Restore body scroll
+    body.classList.remove('no-scroll');
 }
 
+// Event listeners
 mobileMenuBtn.addEventListener('click', openMobileMenu);
 mobileCloseBtn.addEventListener('click', closeMobileMenu);
 
-// Close menu when clicking on links
+// Close menu when clicking on mobile menu links
 document.querySelectorAll('.mobile-nav-link').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
-        const targetId = link.getAttribute('href');
         closeMobileMenu();
         
-        // Smooth scroll to target after a short delay
         setTimeout(() => {
+            const targetId = link.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 window.scrollTo({
@@ -61,6 +61,29 @@ document.querySelectorAll('.mobile-nav-link').forEach(link => {
             }
         }, 300);
     });
+});
+
+// Mobile menu CV button
+document.querySelector('.mobile-cv-btn')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    closeMobileMenu();
+    console.log('CV Download initiated');
+});
+
+// Mobile menu HIRE ME button
+document.querySelector('.mobile-hire-btn')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    closeMobileMenu();
+    
+    setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+            window.scrollTo({
+                top: contactSection.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        }
+    }, 300);
 });
 
 // Close menu when clicking outside
@@ -75,6 +98,13 @@ document.addEventListener('click', (e) => {
 // Close menu on Escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+        closeMobileMenu();
+    }
+});
+
+// Close menu on window resize (if needed)
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024 && mobileMenu.classList.contains('active')) {
         closeMobileMenu();
     }
 });
@@ -97,12 +127,10 @@ fadeElements.forEach(el => observer.observe(el));
 // ==== SMOOTH SCROLL FOR DESKTOP LINKS ====
 document.querySelectorAll('.nav-link').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
+        e.preventDefault();
         const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-            e.preventDefault();
             window.scrollTo({
                 top: targetElement.offsetTop - 80,
                 behavior: 'smooth'
@@ -112,11 +140,10 @@ document.querySelectorAll('.nav-link').forEach(anchor => {
 });
 
 // ==== BUTTON FUNCTIONALITY ====
-document.querySelectorAll('.hire-btn, .btn-hire, .mobile-hire-btn').forEach(btn => {
+document.querySelectorAll('.hire-btn, .btn-hire').forEach(btn => {
     btn.addEventListener('click', function(e) {
         if (this.getAttribute('href') === '#contact') {
             e.preventDefault();
-            closeMobileMenu(); // Close menu on mobile
             document.getElementById('contact').scrollIntoView({ 
                 behavior: 'smooth',
                 block: 'start'
@@ -127,8 +154,7 @@ document.querySelectorAll('.hire-btn, .btn-hire, .mobile-hire-btn').forEach(btn 
 
 document.querySelectorAll('.btn-cv').forEach(btn => {
     btn.addEventListener('click', function(e) {
-        console.log('CV Download initiated');
-        // Add download tracking if needed
+        console.log('Desktop CV Download initiated');
     });
 });
 
@@ -172,23 +198,6 @@ document.querySelectorAll('.project-holo').forEach(card => {
     });
 });
 
-// ==== INITIALIZE ====
-window.addEventListener('load', () => {
-    // Console greeting
-    console.log('%c🔥 DAGIM DESALEGN - ULTIMATE PORTFOLIO 🔥', 'color: #00FF41; font-size: 18px; font-weight: bold;');
-    console.log('%c> Domain: dagi-tech.com', 'color: #00FFFF;');
-    console.log('%c> Mobile Menu: No scroll effect implemented', 'color: #00FF41;');
-    console.log('%c> Theme Toggle: Before hamburger button', 'color: #00FF41;');
-    console.log('%c> Layout: Name → Intro → Image → Sections', 'color: #00FF41;');
-    
-    // Auto-hide mobile menu on desktop resize
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 1024 && mobileMenu.classList.contains('active')) {
-            closeMobileMenu();
-        }
-    });
-});
-
 // ==== ACTIVE NAV LINK HIGHLIGHTING ====
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section');
@@ -208,5 +217,35 @@ window.addEventListener('scroll', () => {
         if (link.getAttribute('href') === `#${current}`) {
             link.classList.add('active');
         }
+    });
+});
+
+// ==== INITIALIZE ====
+window.addEventListener('load', () => {
+    // Console greeting
+    console.log('%c🔥 DAGIM DESALEGN - PORTFOLIO 🔥', 'color: #00FF41; font-size: 18px; font-weight: bold;');
+    console.log('%c> Mobile Menu: Compact design with both buttons visible', 'color: #00FFFF;');
+    console.log('%c> Profile Image: Fixed with proper padding', 'color: #00FF41;');
+    console.log('%c> Layout: Clean & responsive', 'color: #00FF41;');
+    
+    // Initialize active link
+    setTimeout(() => {
+        const navLinks = document.querySelectorAll('.nav-link');
+        if (navLinks.length > 0) {
+            navLinks[0].classList.add('active');
+        }
+    }, 100);
+});
+
+// ==== MOBILE MENU AUTO-CLOSE ON LINK CLICK ====
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click listeners to all mobile nav links
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            setTimeout(() => {
+                closeMobileMenu();
+            }, 300);
+        });
     });
 });
