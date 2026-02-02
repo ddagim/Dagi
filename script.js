@@ -1,4 +1,4 @@
-﻿// ==== THEME TOGGLE ====
+// ==== THEME TOGGLE ====
 const themeToggle = document.getElementById('themeToggle');
 const mobileThemeToggle = document.getElementById('mobileThemeToggle');
 let isDark = true;
@@ -24,30 +24,57 @@ if (savedTheme === 'light') {
     if (mobileThemeToggle) mobileThemeToggle.innerHTML = '<i class="fas fa-sun"></i>';
 }
 
-// ==== THREE-DOT MOBILE MENU ====
+// ==== MOBILE MENU - NO SCROLL EFFECT ====
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileCloseBtn = document.getElementById('mobileCloseBtn');
 const mobileMenu = document.getElementById('mobileMenu');
+const body = document.body;
 
-function toggleMobileMenu() {
-    mobileMenuBtn.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
+function openMobileMenu() {
+    mobileMenu.classList.add('active');
+    body.classList.add('no-scroll'); // Prevent body scroll
 }
 
 function closeMobileMenu() {
-    mobileMenuBtn.classList.remove('active');
     mobileMenu.classList.remove('active');
+    body.classList.remove('no-scroll'); // Restore body scroll
 }
 
-mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+mobileMenuBtn.addEventListener('click', openMobileMenu);
+mobileCloseBtn.addEventListener('click', closeMobileMenu);
 
 // Close menu when clicking on links
 document.querySelectorAll('.mobile-nav-link').forEach(link => {
-    link.addEventListener('click', closeMobileMenu);
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        closeMobileMenu();
+        
+        // Smooth scroll to target after a short delay
+        setTimeout(() => {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }, 300);
+    });
 });
 
 // Close menu when clicking outside
 document.addEventListener('click', (e) => {
-    if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+    if (!mobileMenu.contains(e.target) && 
+        !mobileMenuBtn.contains(e.target) && 
+        mobileMenu.classList.contains('active')) {
+        closeMobileMenu();
+    }
+});
+
+// Close menu on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
         closeMobileMenu();
     }
 });
@@ -67,8 +94,8 @@ const observer = new IntersectionObserver((entries) => {
 
 fadeElements.forEach(el => observer.observe(el));
 
-// ==== SMOOTH SCROLL ====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// ==== SMOOTH SCROLL FOR DESKTOP LINKS ====
+document.querySelectorAll('.nav-link').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
@@ -80,27 +107,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 top: targetElement.offsetTop - 80,
                 behavior: 'smooth'
             });
-            closeMobileMenu();
         }
     });
 });
 
-// ==== HIRE ME BUTTON FUNCTIONALITY ====
-document.querySelectorAll('.hire-btn, .btn-hire').forEach(btn => {
+// ==== BUTTON FUNCTIONALITY ====
+document.querySelectorAll('.hire-btn, .btn-hire, .mobile-hire-btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
         if (this.getAttribute('href') === '#contact') {
             e.preventDefault();
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-            console.log('Hire Me button clicked - Redirecting to contact section');
+            closeMobileMenu(); // Close menu on mobile
+            document.getElementById('contact').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
     });
 });
 
-// ==== CV DOWNLOAD FUNCTIONALITY ====
 document.querySelectorAll('.btn-cv').forEach(btn => {
     btn.addEventListener('click', function(e) {
-        console.log('CV Download button clicked');
-        // Optional: Add download tracking or analytics here
+        console.log('CV Download initiated');
+        // Add download tracking if needed
     });
 });
 
@@ -136,39 +164,29 @@ document.querySelectorAll('.skill-item').forEach(item => {
 // ==== PROJECT CARDS HOVER EFFECTS ====
 document.querySelectorAll('.project-holo').forEach(card => {
     card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px) rotateX(5deg)';
+        this.style.transform = 'translateY(-10px)';
     });
     
     card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) rotateX(0)';
+        this.style.transform = 'translateY(0)';
     });
 });
 
 // ==== INITIALIZE ====
 window.addEventListener('load', () => {
     // Console greeting
-    console.log('%c🔥 DAGIM DESALEGN - ULTIMATE HACKER PORTFOLIO 🔥', 'color: #00FF41; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px #00FF41;');
+    console.log('%c🔥 DAGIM DESALEGN - ULTIMATE PORTFOLIO 🔥', 'color: #00FF41; font-size: 18px; font-weight: bold;');
     console.log('%c> Domain: dagi-tech.com', 'color: #00FFFF;');
-    console.log('%c> Status: Portfolio fully loaded', 'color: #00FF41;');
-    console.log('%c> Features: Theme toggle, Mobile menu, Smooth scroll', 'color: #00FF41;');
-    console.log('%c> Buttons: Hire Me & View CV with attractive design', 'color: #00FF41;');
+    console.log('%c> Mobile Menu: No scroll effect implemented', 'color: #00FF41;');
+    console.log('%c> Theme Toggle: Before hamburger button', 'color: #00FF41;');
+    console.log('%c> Layout: Name → Intro → Image → Sections', 'color: #00FF41;');
     
     // Auto-hide mobile menu on desktop resize
     window.addEventListener('resize', () => {
-        if (window.innerWidth > 1024) {
+        if (window.innerWidth > 1024 && mobileMenu.classList.contains('active')) {
             closeMobileMenu();
         }
     });
-});
-
-// ==== SCROLL PROGRESS INDICATOR ====
-window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = scrollTop / docHeight * 100;
-    
-    // Optional: Add scroll progress bar if needed
-    // You could add a progress bar at the top
 });
 
 // ==== ACTIVE NAV LINK HIGHLIGHTING ====
@@ -180,7 +198,7 @@ window.addEventListener('scroll', () => {
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 100)) {
+        if (window.scrollY >= (sectionTop - 100)) {
             current = section.getAttribute('id');
         }
     });
