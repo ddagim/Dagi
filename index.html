@@ -1,9 +1,9 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAGIM DESALEGN | Full-Stack Dev</title>
+    <title>DAGIM DESALEGN | Full-Stack Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=JetBrains+Mono:wght@300;400;600&family=Audiowide&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -20,7 +20,7 @@
         <div class="logo">
             <div>
                 <div class="logo-text">DAGIM DESALEGN</div>
-                <div class="logo-domain">dagi-tech.com</div>
+                
             </div>
         </div>
         
@@ -44,15 +44,28 @@
             </div>
         </div>
         
-        <!-- Mobile Three-Dot Menu -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+        <!-- Mobile Header Actions -->
+        <div class="mobile-header-actions">
+            <button class="theme-toggle" id="mobileThemeToggle">
+                <i class="fas fa-adjust"></i>
+            </button>
+            <!-- Mobile Three-Dot Menu -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
         
         <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <div class="mobile-logo">DAGIM DESALEGN</div>
+                <button class="mobile-close-btn" id="mobileCloseBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
             <ul class="mobile-nav-links">
                 <li><a href="#home" class="mobile-nav-link">HOME</a></li>
                 <li><a href="#skills" class="mobile-nav-link">SKILLS</a></li>
@@ -61,48 +74,54 @@
                 <li><a href="#contact" class="mobile-nav-link">CONTACT</a></li>
             </ul>
             
-            <div class="mobile-actions">
-                <a href="#contact" class="hire-btn">
+            <div class="mobile-menu-footer">
+                <a href="#contact" class="mobile-hire-btn">
                     <i class="fas fa-terminal"></i> HIRE ME
                 </a>
-                <button class="theme-toggle" id="mobileThemeToggle">
-                    <i class="fas fa-adjust"></i>
-                </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - Name & Intro Only -->
     <section class="hero" id="home">
         <div class="hero-container">
-            <div class="hero-grid">
-                <div class="profile-frame fade-in">
-                    <div class="profile-image">
-                     <img src="dagim.jpg" alt="Dagim Desalegn" style="width:100%;height:100%;object-fit:cover;">
-                   </div>
+            <div class="hero-content fade-in">
+                <h1 class="hero-title">DAGIM DESALEGN</h1>
+                <div class="hero-subtitle">FULL-STACK DEVELOPER</div>
+                <p class="hero-bio">
+                    From <span class="highlight">Addis Ababa</span> to the digital frontier. 
+                    Computer Science student at Jimma University mastering full-stack development, 
+                    Telegram bot architecture, and ethical hacking.
+                </p>
+                <p class="hero-quote">"I love problems. I know how to solve them."</p>
+                
+                <!-- Attractive Action Buttons -->
+                <div class="action-buttons">
+                    <a href="#contact" class="btn-hire">
+                        <i class="fas fa-bolt"></i>
+                        HIRE ME
+                        <span class="btn-glow"></span>
+                    </a>
+                    <a href="Dagim-Desalegn.pdf" download class="btn-cv">
+                        <i class="fas fa-file-download"></i>
+                        VIEW CV
+                        <span class="btn-glow"></span>
+                    </a>
                 </div>
-                <div class="hero-content fade-in">
-                    <h1 class="hero-title">DAGIM DESALEGN </h1>
-                    <div class="hero-subtitle">FULL-STACK DEV</div>
-                    <p class="hero-bio">
-                        From <span class="highlight">Addis Ababa</span> to the digital frontier. 
-                        Computer Science student at Jimma University mastering full-stack development, 
-                        Telegram bot architecture, and ethical hacking. "I love problems. I know how to solve them."
-                    </p>
-                    
-                    <!-- Attractive Action Buttons -->
-                    <div class="action-buttons">
-                        <a href="#contact" class="btn-hire">
-                            <i class="fas fa-bolt"></i>
-                            HIRE ME
-                            <span class="btn-glow"></span>
-                        </a>
-                        <a href="Dagim-Desalegn.pdf" download class="btn-cv">
-                            <i class="fas fa-file-download"></i>
-                            VIEW CV
-                            <span class="btn-glow"></span>
-                        </a>
-                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Image Section -->
+    <section class="profile-section">
+        <div class="profile-container">
+            <div class="profile-image-wrapper fade-in">
+                <div class="profile-frame">
+                    <img src="dagim.jpg" alt="Dagim Desalegn" class="profile-img">
+                    <div class="profile-glow"></div>
+                </div>
+                <div class="profile-badge">
+                    <i class="fas fa-user-secret"></i> ETHICAL HACKER
                 </div>
             </div>
         </div>
@@ -192,7 +211,6 @@
                         <span class="tech-chip">Node.js</span>
                         <span class="tech-chip">React</span>
                         <span class="tech-chip">Telegram API</span>
-                        
                     </div>
                 </div>
             </div>
@@ -211,8 +229,7 @@
                         <span class="tech-chip">Python</span>
                         <span class="tech-chip">Gemini AI</span>
                         <span class="tech-chip">MongoDB</span>
-                        <span class="tech-chip">Type script</span>
-                
+                        <span class="tech-chip">TypeScript</span>
                     </div>
                 </div>
             </div>
@@ -297,7 +314,7 @@
 
             <div class="hack-node fade-in">
                 <div class="node-card">
-                    <div class="node-year">2018(EC)</div>
+                    <div class="node-year">2028(EC)</div>
                     <h3 class="node-title">TELEGRAM MASTERY</h3>
                     <p class="node-desc">
                         Full-stack Telegram Mini App development. Secure platform for ABJ Tutorial 
@@ -346,16 +363,8 @@
             </div>
         </div>
 
-        <!-- Social Media at Bottom -->
-
-            <div class="footer-content">
-                <div class="footer-logo">DAGIM DESALEGN</div>
-                
-                <div class="footer-quote fade-in">
-                    "I love problems. I know how to solve these because I learned data structures. 
-                    I need to record every task because I understand the power of databases."
-                </div>
-                <div class="social-footer">
+        <!-- Social Media -->
+        <div class="social-footer">
             <div class="social-icons">
                 <a href="https://github.com/dagimdesalegn" target="_blank" class="social-icon" title="GitHub">
                     <i class="fab fa-github"></i>
@@ -370,9 +379,17 @@
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
-               
+
+            <div class="footer-content">
+                <div class="footer-logo">DAGIM DESALEGN</div>
+                
+                <div class="footer-quote fade-in">
+                    "I love problems. I know how to solve these because I learned data structures. 
+                    I need to record every task because I understand the power of databases."
+                </div>
+
                 <div class="copyright fade-in">
-                    © 2024 <span class="domain-highlight"></span> | All Systems Operational 
+                    © 2024 <span class="domain-highlight">dagi-tech.com</span> | All Systems Operational 
                 </div>
             </div>
         </div>
@@ -380,5 +397,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
