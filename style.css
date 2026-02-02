@@ -232,51 +232,42 @@ nav {
     transform: rotate(90deg);
 }
 
-/* MOBILE HEADER ACTIONS - THEME BEFORE HAMBURGER */
+/* ==== MOBILE HEADER ACTIONS - MINIMAL & COMPACT ==== */
 .mobile-header-actions {
     display: none;
     align-items: center;
-    gap: 1rem;
+    gap: 10px; /* Reduced gap */
 }
 
-/* MOBILE HAMBURGER MENU (THREE DOTS) */
+/* THREE DOT MENU BUTTON - MINIMAL */
 .mobile-menu-btn {
     background: transparent;
     border: 2px solid var(--hacker-green);
     color: var(--hacker-green);
-    width: 40px;
-    height: 40px;
+    width: 35px; /* Smaller */
+    height: 35px; /* Smaller */
     border-radius: 4px;
     cursor: pointer;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 4px;
     transition: all 0.3s ease;
-}
-
-.mobile-menu-btn span {
-    width: 20px;
-    height: 2px;
-    background: var(--hacker-green);
-    transition: 0.3s;
+    font-size: 1.1rem;
+    padding: 0;
 }
 
 .mobile-menu-btn:hover {
     background: var(--hacker-green);
+    color: var(--hacker-bg);
+    transform: scale(1.1);
 }
 
-.mobile-menu-btn:hover span {
-    background: var(--hacker-bg);
-}
-
-/* MOBILE MENU - NO SCROLL */
+/* ==== MOBILE MENU - COMPACT & SCROLLABLE ==== */
 .mobile-menu {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 300px;
+    width: 280px; /* Smaller width */
     height: 100vh;
     background: var(--nav-bg);
     backdrop-filter: blur(20px);
@@ -285,6 +276,8 @@ nav {
     display: flex;
     flex-direction: column;
     overflow: hidden !important;
+    border-left: 2px solid var(--hacker-green);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
 }
 
 .mobile-menu.active {
@@ -292,28 +285,30 @@ nav {
 }
 
 .mobile-menu-header {
-    padding: 1.5rem;
+    padding: 1rem 1.2rem; /* Smaller padding */
     border-bottom: 2px solid var(--hacker-green);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
+    min-height: 70px; /* Fixed height */
 }
 
 .mobile-logo {
     font-family: 'Orbitron', sans-serif;
     color: var(--hacker-green);
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .mobile-close-btn {
     background: transparent;
     border: none;
     color: var(--hacker-green);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -327,20 +322,24 @@ nav {
 }
 
 .mobile-nav-links {
-    padding: 1.5rem;
+    padding: 1rem 1.2rem;
     list-style: none;
     flex: 1;
     overflow-y: auto !important;
+    max-height: calc(100vh - 220px); /* Limit height for scrolling */
+    margin-bottom: 1rem;
 }
 
 .mobile-nav-link {
     color: var(--text-primary) !important;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 0.95rem; /* Smaller font */
     font-weight: 600;
-    padding: 1rem;
-    margin-bottom: 0.5rem;
-    display: block;
+    padding: 0.8rem 1rem; /* Smaller padding */
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     border-radius: 6px;
     transition: all 0.3s ease;
     border-left: 3px solid transparent;
@@ -350,24 +349,37 @@ nav {
     color: var(--hacker-green) !important;
     background: rgba(0, 255, 65, 0.1);
     border-left-color: var(--hacker-green);
-    padding-left: 1.5rem;
+    padding-left: 1.2rem;
 }
 
+.mobile-nav-link i {
+    width: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* ==== MOBILE MENU FOOTER - BOTH BUTTONS VISIBLE ==== */
 .mobile-menu-footer {
-    padding: 1.5rem;
+    padding: 1rem 1.2rem;
     border-top: 1px solid rgba(0, 255, 65, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    flex-shrink: 0;
+    background: var(--nav-bg);
 }
 
-.mobile-hire-btn {
-    background: linear-gradient(45deg, var(--hacker-green), var(--hacker-cyan));
-    color: var(--hacker-bg) !important;
-    padding: 1rem;
+.mobile-cv-btn {
+    background: transparent;
+    border: 2px solid var(--hacker-green);
+    color: var(--hacker-green) !important;
+    padding: 0.8rem;
     border-radius: 30px;
     font-weight: bold;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -376,13 +388,54 @@ nav {
     width: 100%;
 }
 
+.mobile-cv-btn:hover {
+    background: var(--hacker-green);
+    color: var(--hacker-bg) !important;
+    transform: translateY(-2px);
+}
+
+.mobile-hire-btn {
+    background: linear-gradient(45deg, var(--hacker-green), var(--hacker-cyan));
+    color: var(--hacker-bg) !important;
+    padding: 0.9rem;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.mobile-hire-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.mobile-hire-btn:hover::after {
+    left: 100%;
+}
+
 .mobile-hire-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 255, 65, 0.5);
+    box-shadow: 0 8px 20px rgba(0, 255, 65, 0.4);
     background: linear-gradient(45deg, var(--hacker-cyan), var(--hacker-green));
 }
 
-/* ==== HERO SECTION - NAME & INTRO ONLY ==== */
+/* ==== HERO SECTION ==== */
 .hero {
     min-height: 70vh;
     display: flex;
@@ -450,43 +503,57 @@ nav {
     font-weight: bold;
 }
 
-/* ==== PROFILE IMAGE SECTION ==== */
+/* ==== PROFILE IMAGE SECTION - FIXED WITH PADDING ==== */
 .profile-section {
-    padding: 2rem 1.5rem;
+    padding: 3rem 1.5rem;
     position: relative;
-    margin-top: -5rem;
+    margin-top: 2rem;
     margin-bottom: 5rem;
 }
 
 .profile-container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 2rem;
 }
 
 .profile-image-wrapper {
     position: relative;
     max-width: 400px;
     margin: 0 auto;
+    padding: 20px; /* Padding around image */
+    background: rgba(0, 20, 0, 0.2);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 65, 0.2);
 }
 
 .profile-frame {
     position: relative;
     width: 100%;
     aspect-ratio: 1;
-    border-radius: 20px;
+    border-radius: 15px;
     overflow: hidden;
-    border: 4px solid var(--hacker-green);
+    border: 3px solid var(--hacker-green);
     box-shadow: 
-        0 0 50px var(--border-glow),
-        inset 0 0 50px rgba(0, 255, 65, 0.1);
-    margin-bottom: 2rem;
+        0 0 40px var(--border-glow),
+        inset 0 0 30px rgba(0, 255, 65, 0.1);
+    margin-bottom: 1.5rem;
+    padding: 10px; /* Internal padding */
+    background: rgba(0, 10, 0, 0.4);
 }
 
 .profile-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center top; /* Centers image from top */
     display: block;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.02);
 }
 
 .profile-glow {
@@ -495,15 +562,19 @@ nav {
     left: -10px;
     right: -10px;
     bottom: -10px;
-    background: linear-gradient(45deg, 
-        var(--hacker-green), 
-        transparent, 
-        var(--hacker-cyan),
-        transparent,
-        var(--hacker-green));
-    border-radius: 30px;
+    background: conic-gradient(
+        from 0deg at 50% 50%,
+        var(--hacker-green) 0deg,
+        var(--hacker-cyan) 90deg,
+        var(--hacker-green) 180deg,
+        var(--hacker-cyan) 270deg,
+        var(--hacker-green) 360deg
+    );
+    border-radius: 25px;
     z-index: -1;
-    animation: rotateGlow 10s linear infinite;
+    animation: rotateGlow 8s linear infinite;
+    filter: blur(12px);
+    opacity: 0.6;
 }
 
 @keyframes rotateGlow {
@@ -512,22 +583,25 @@ nav {
 }
 
 .profile-badge {
-    background: rgba(0, 255, 65, 0.1);
+    background: rgba(0, 255, 65, 0.15);
     border: 2px solid var(--hacker-green);
     color: var(--hacker-green);
-    padding: 0.8rem 2rem;
+    padding: 0.7rem 1.8rem;
     border-radius: 30px;
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     display: inline-flex;
     align-items: center;
     gap: 10px;
     position: absolute;
-    bottom: -20px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0, 255, 65, 0.2);
+    z-index: 5;
+    font-size: 0.9rem;
 }
 
 /* ==== ACTION BUTTONS ==== */
@@ -1063,6 +1137,10 @@ nav {
     .action-buttons {
         justify-content: center;
     }
+    
+    .profile-image-wrapper {
+        max-width: 350px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1071,8 +1149,29 @@ nav {
         min-height: 60vh;
     }
     
+    .profile-section {
+        padding: 2rem 1rem;
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+    }
+    
+    .profile-container {
+        padding: 0 1rem;
+    }
+    
+    .profile-image-wrapper {
+        max-width: 320px;
+        padding: 15px;
+    }
+    
     .profile-frame {
-        max-width: 300px;
+        margin-bottom: 1.5rem;
+        padding: 8px;
+    }
+    
+    .profile-badge {
+        font-size: 0.85rem;
+        padding: 0.6rem 1.5rem;
     }
     
     .skill-items {
@@ -1096,11 +1195,6 @@ nav {
         flex-direction: column;
         align-items: center;
     }
-    
-    .profile-section {
-        margin-top: 0;
-        margin-bottom: 3rem;
-    }
 }
 
 @media (max-width: 480px) {
@@ -1112,13 +1206,28 @@ nav {
         font-size: 1.2rem;
     }
     
-    .profile-frame {
+    .profile-image-wrapper {
         max-width: 280px;
+        padding: 10px;
+    }
+    
+    .profile-badge {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.8rem;
+        bottom: 5px;
     }
     
     .btn-hire, .btn-cv {
         padding: 1rem 2rem;
         font-size: 0.9rem;
+    }
+    
+    .mobile-menu {
+        width: 100%;
+    }
+    
+    .mobile-menu-footer {
+        flex-direction: column;
     }
 }
 
@@ -1150,6 +1259,20 @@ nav {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--hacker-green-light);
+}
+
+/* Mobile menu scrollbar */
+.mobile-nav-links::-webkit-scrollbar {
+    width: 4px;
+}
+
+.mobile-nav-links::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.mobile-nav-links::-webkit-scrollbar-thumb {
+    background: var(--hacker-green);
+    border-radius: 2px;
 }
 
 /* ==== NO SCROLL WHEN MENU IS OPEN ==== */
