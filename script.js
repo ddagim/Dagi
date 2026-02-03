@@ -24,31 +24,22 @@ if (savedTheme === 'light') {
     if (mobileThemeToggle) mobileThemeToggle.innerHTML = '<i class="fas fa-sun"></i>';
 }
 
-// ==== MOBILE MENU - COMPACT & FUNCTIONAL ====
+// ==== MOBILE MENU - SIMPLE DROPDOWN ====
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileCloseBtn = document.getElementById('mobileCloseBtn');
 const mobileMenu = document.getElementById('mobileMenu');
-const body = document.body;
 
-function openMobileMenu() {
-    mobileMenu.classList.add('active');
-    body.classList.add('no-scroll');
-}
-
-function closeMobileMenu() {
-    mobileMenu.classList.remove('active');
-    body.classList.remove('no-scroll');
+function toggleMobileMenu() {
+    mobileMenu.classList.toggle('active');
 }
 
 // Event listeners
-mobileMenuBtn.addEventListener('click', openMobileMenu);
-mobileCloseBtn.addEventListener('click', closeMobileMenu);
+mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 
 // Close menu when clicking on mobile menu links
 document.querySelectorAll('.mobile-nav-link').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
-        closeMobileMenu();
+        mobileMenu.classList.remove('active');
         
         setTimeout(() => {
             const targetId = link.getAttribute('href');
@@ -59,31 +50,8 @@ document.querySelectorAll('.mobile-nav-link').forEach(link => {
                     behavior: 'smooth'
                 });
             }
-        }, 300);
+        }, 100);
     });
-});
-
-// Mobile menu CV button
-document.querySelector('.mobile-cv-btn')?.addEventListener('click', function(e) {
-    e.preventDefault();
-    closeMobileMenu();
-    console.log('CV Download initiated');
-});
-
-// Mobile menu HIRE ME button
-document.querySelector('.mobile-hire-btn')?.addEventListener('click', function(e) {
-    e.preventDefault();
-    closeMobileMenu();
-    
-    setTimeout(() => {
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-            window.scrollTo({
-                top: contactSection.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
-    }, 300);
 });
 
 // Close menu when clicking outside
@@ -91,21 +59,21 @@ document.addEventListener('click', (e) => {
     if (!mobileMenu.contains(e.target) && 
         !mobileMenuBtn.contains(e.target) && 
         mobileMenu.classList.contains('active')) {
-        closeMobileMenu();
+        mobileMenu.classList.remove('active');
     }
 });
 
 // Close menu on Escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-        closeMobileMenu();
+        mobileMenu.classList.remove('active');
     }
 });
 
-// Close menu on window resize (if needed)
+// Close menu on window resize
 window.addEventListener('resize', () => {
     if (window.innerWidth > 1024 && mobileMenu.classList.contains('active')) {
-        closeMobileMenu();
+        mobileMenu.classList.remove('active');
     }
 });
 
@@ -224,9 +192,9 @@ window.addEventListener('scroll', () => {
 window.addEventListener('load', () => {
     // Console greeting
     console.log('%c🔥 DAGIM DESALEGN - PORTFOLIO 🔥', 'color: #00FF41; font-size: 18px; font-weight: bold;');
-    console.log('%c> Mobile Menu: Compact design with both buttons visible', 'color: #00FFFF;');
-    console.log('%c> Profile Image: Fixed with proper padding', 'color: #00FF41;');
-    console.log('%c> Layout: Clean & responsive', 'color: #00FF41;');
+    console.log('%c> Fixed: Contact section theme consistency', 'color: #00FFFF;');
+    console.log('%c> Added: Programming Languages skill matrix', 'color: #00FF41;');
+    console.log('%c> Mobile Menu: Compact dropdown without buttons', 'color: #00FF41;');
     
     // Initialize active link
     setTimeout(() => {
@@ -235,17 +203,4 @@ window.addEventListener('load', () => {
             navLinks[0].classList.add('active');
         }
     }, 100);
-});
-
-// ==== MOBILE MENU AUTO-CLOSE ON LINK CLICK ====
-document.addEventListener('DOMContentLoaded', function() {
-    // Add click listeners to all mobile nav links
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            setTimeout(() => {
-                closeMobileMenu();
-            }, 300);
-        });
-    });
 });
