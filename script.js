@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScroll();
     initContactForm();
     initButtonEffects();
+    initTypingEffect();
     
     // Initialize EmailJS after DOM is loaded
     setTimeout(() => {
@@ -337,9 +338,32 @@ function initButtonEffects() {
 }
 
 // ===== SECURITY NOTE =====
-// EmailJS ALWAYS exposes these parameters in the API call:
-// 1. user_id (public key) - Required by EmailJS for authentication
-// 2. service_id - Identifies your EmailJS service
-// 3. template_id - Identifies your email template
-// This is NORMAL and how EmailJS works
-// The keys are public-facing by design and can only send emails to your configured email
+// ===== TYPING EFFECT =====
+function initTypingEffect() {
+    const typedElement = document.getElementById('typed-subtitle');
+    const text = 'FULL-STACK DEVELOPER';
+    let index = 0;
+    let isDeleting = false;
+    
+    function typeWriter() {
+        if (!isDeleting) {
+            typedElement.textContent = text.substring(0, index + 1);
+            index++;
+            if (index === text.length) {
+                isDeleting = true;
+                setTimeout(typeWriter, 2000); // Pause at end
+                return;
+            }
+        } else {
+            typedElement.textContent = text.substring(0, index - 1);
+            index--;
+            if (index === 0) {
+                isDeleting = false;
+            }
+        }
+        setTimeout(typeWriter, isDeleting ? 100 : 150);
+    }
+    
+    // Start typing effect after a short delay
+    setTimeout(typeWriter, 1000);
+}
